@@ -1,0 +1,33 @@
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+background-color: lightslategrey;
+flex-direction: column;
+    gap: 20px;
+}
+
+#box{
+    height: 500px;
+    width: 500px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: brown;
+}
+
+button{
+    padding: 10px 20px;
+    font-size: medium;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    background-color: mediumorchid;
+    
+}
+button:hover{
+    background-color: orchid;
+    cursor: pointer;}
+button:active{
+    scale: 0.95;
+}

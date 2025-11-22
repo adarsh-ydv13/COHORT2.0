@@ -1,0 +1,31 @@
+html, body {
+    height: 100%; /* Ab main ka 100% kaam karega */
+    margin: 0;    /* Default margins remove karne ke liye */
+}
+
+main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+ 
+    overflow: hidden;
+    position: absolute;
+}
+
+button{
+    border-radius: 10px;
+    font-size: 35px;
+    padding: 20px 20px;
+    cursor: pointer;
+    background-color: antiquewhite;
+    position: absolute;
+    z-index: 90;
+}
+
+button:active{
+    scale: 0.95;
+}

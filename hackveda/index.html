@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Reads - Gradient Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #1e1e2d;
+            --darker-bg: #14141c;
+            --primary-accent: #0077c2; 
+            --secondary-accent: #6a0dad; 
+            --text-light: #f0f0f0;
+            --text-dark: #c0c0c0;
+            --gradient-main: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            --card-bg: rgba(255, 255, 255, 0.05); 
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            background: var(--darker-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-header {
+            background-color: var(--dark-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            position: sticky;
+            top: 0;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8em;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s;
+        }
+        .main-header h1:hover {
+            transform: translateY(-2px);
+        }
+
+        .main-header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-header nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0 20px;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .main-header nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%;
+            height: 2px;
+            background: var(--gradient-main);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .main-header nav ul li a:hover {
+            color: var(--primary-accent);
+        }
+        .main-header nav ul li a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+    
+        .main-content {
+            flex: 1; 
+            padding: 40px 0;
+        }
+        
+        .card {
+            background: var(--card-bg); 
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+        }
+
+    
+        .post-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .post-meta {
+            font-size: 0.9em;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .post-meta i {
+            color: var(--primary-accent);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .post-content p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: var(--text-dark);
+        }
+        .post-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            color: var(--secondary-accent);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--secondary-accent);
+            padding-left: 15px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-subtle);
+            margin: 40px 0;
+        }
+
+        .comments-section h3, .add-post-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-accent);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--darker-bg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 10px rgba(0, 119, 194, 0.5);
+        }
+
+        button {
+            background: var(--gradient-main);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        /* Individual Comments */
+        .comment {
+            background-color: var(--dark-bg);
+            border: 1px solid rgba(0, 119, 194, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: var(--primary-accent);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .comment-text {
+            color: var(--text-dark);
+        }
+
+        /* Add Post Form Specific Styles */
+        #add-post-section {
+            display: none; 
+        }
+
+        .add-post-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: var(--dark-bg);
+            color: var(--text-dark);
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <h1><a href="#" id="blog-title-link">Quantum Reads</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#" id="home-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-layer-group"></i> Categories</a></li>
+                    <li><a href="#" id="add-post-link"><i class="fas fa-plus-circle"></i> Add New Post</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        
+        <section id="single-post-section" class="card">
+            <article>
+                <h2 class="post-title">Exploring the Metaverse: A New Reality?</h2>
+                <p class="post-meta">
+                    <span><i class="fas fa-user-astronaut"></i> By: **A.I. Nexus**</span> 
+                    <span><i class="far fa-calendar-alt"></i> Date: December 01, 2025</span> 
+                    <span><i class="fas fa-tags"></i> Category: Future Tech</span>
+                </p>
+                
+                <img src="https://via.placeholder.com/1200x400/1e1e2d/0077c2?text=Subtle+Concept+Image" alt="Futuristic Metaverse Concept" class="post-image">
+                
+                <div class="post-content">
+                    <p>Welcome to Quantum Reads. Today, we delve into the burgeoning concept of the Metaverse—a persistent, shared, 3D virtual space where users can interact with each other and with digital objects. This version of the UI uses **linear gradients** for branding and buttons, providing a modern look without the excessive shining effects.</p>
+                    
+                    <h3>The Building Blocks of a Digital Frontier</h3>
+                    <p>At its core, the Metaverse is powered by a confluence of advanced technologies: virtual reality (VR), augmented reality (AR), artificial intelligence (AI), and blockchain. These components work in tandem to create immersive experiences.</p>
+
+                    <p>The visual style here focuses on deep space colors, muted text, and vibrant but contained gradient accents for a sophisticated and professional futuristic feel.</p>
+                </div>
+            </article>
+            
+            <hr>
+
+            <section class="comments-section">
+                <h3><i class="fas fa-comments"></i> User Echoes (3)</h3>
+                
+                <div class="comment-form-container">
+                    <h4>Submit Your Resonance</h4>
+                    <form id="comment-form" style="display: flex; flex-direction: column; gap: 15px;">
+                        <input type="text" placeholder="Your Digital Alias" required>
+                        <textarea placeholder="Share your insights..." rows="4" required></textarea>
+                        <button type="submit"><i class="fas fa-paper-plane"></i> Transmit Comment</button>
+                    </form>
+                </div>
+
+                <div class="comment-list">
+                    <div class="comment">
+                        <p class="comment-author">**AuraByte**</p>
+                        <p class="comment-text">Fascinating article! The potential for digital economies is truly mind-bending.</p>
+                    </div>
+                    <div class="comment">
+                        <p class="comment-author">**NeoSage**</p>
+                        <p class="comment-text">I'm excited for the creative applications but also cautious about privacy.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+        <section id="add-post-section" class="card">
+            <h2><i class="fas fa-feather-alt"></i> Forge New Knowledge</h2>
+            <form class="add-post-form">
+                <input type="text" placeholder="Quantum Title (e.g., A.I. Ethics in 2050)" required>
+                
+                <textarea rows="20" placeholder="Your profound insights begin here... Maximize data transmission." required></textarea>
+                
+                <input type="text" placeholder="Neural Link (Image URL - Optional)" >
+
+                <select>
+                    <option value="">Select Data Stream (Category)</option>
+                    <option value="tech">Future Tech</option>
+                    <option value="cyber">Cyber Security</option>
+                    <option value="bio">Bio-Engineering</option>
+                    <option value="space">Cosmic Discoveries</option>
+                </select>
+
+                <button type="submit"><i class="fas fa-upload"></i> Upload Article to Network</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Quantum Reads &copy; 2025 | All Digital Rights Reserved | Powered by Synthetics</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const commentForm = document.getElementById('comment-form');
+            const commentList = document.querySelector('.comment-list');
+            const addPostLink = document.getElementById('add-post-link');
+            const homeLink = document.getElementById('home-link');
+            const blogTitleLink = document.getElementById('blog-title-link');
+            const singlePostSection = document.getElementById('single-post-section');
+            const addPostSection = document.getElementById('add-post-section');
+
+            // --- 1. Comment Submission Functionality (Frontend Simulation) ---
+            if (commentForm) {
+                commentForm.addEventListener('submit', (e) => {
+                    e.preventDefault(); 
+                    
+                    const nameInput = commentForm.querySelector('input[type="text"]');
+                    const commentTextarea = commentForm.querySelector('textarea');
+                    
+                    const author = nameInput.value.trim();
+                    const text = commentTextarea.value.trim();
+
+                    if (author === '' || text === '') {
+                        alert('Please provide both your digital alias and your insights.');
+                        return;
+                    }
+
+                    const newComment = document.createElement('div');
+                    newComment.classList.add('comment');
+                    newComment.innerHTML = `<p class="comment-author">**${author}**</p><p class="comment-text">${text}</p>`;
+
+                    commentList.prepend(newComment); 
+
+                    nameInput.value = '';
+                    commentTextarea.value = '';
+                    
+                    alert('Insights transmitted successfully (Frontend simulation)!');
+                });
+            }
+
+            // --- 2. View Toggling Functionality ---
+            const showSinglePost = () => {
+                singlePostSection.style.display = 'block';
+                addPostSection.style.display = 'none';
+            };
+
+            const showAddPost = () => {
+                singlePostSection.style.display = 'none';
+                addPostSection.style.display = 'block';
+            };
+            
+            // Event Listeners for navigation links
+            addPostLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showAddPost();
+            });
+
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSinglePost();
+            });
+
+            blogTitleLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSinglePost();
+            });
+
+            // Set initial state
+            showSinglePost(); 
+        });
+    </script>
+</body>
+</html>
