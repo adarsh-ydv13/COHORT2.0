@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 1px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.nav{
+    height: 80px;
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+}
+
+.left{
+    margin-left: 30px;
+}
+
+.left h1{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.right{
+   display: flex;
+   justify-content: space-between;
+   gap: 100px;
+   margin-right: 20px;
+
+} 
+
+.right a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+a:hover{
+    color: grey;
+    cursor: pointer;
+}
+
+button{
+    padding:10px 30px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    background-color: black;
+    margin-left: 30px;
+}
+
+button:hover{
+    background-color: grey;
+    cursor: pointer;
+}
+
+img{
+    width:90%;
+    height: 500px;
+    margin: 20px 5%;
+    border-radius: 30px;
+    object-fit: cover;
+      object-position: center;
+    
+}
+
+.hero{
+    
+     width:90%;
+    height: 500px;
+    margin: 20px 5%;
+     display:flex;
+    justify-content: center ;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 30px;
+    background-image: url(https://images.unsplash.com/photo-1729166241032-5b339506a0d7?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    object-fit: cover;
+      object-position: center;
+}
+
+.hero .center{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+    color: white;
+   
+}
+
+.center h1{
+    font-size: 50px;
+    font-weight: 700;
+   
+}
+
+.center p{
+    font-size: 25px;
+}
+
+.center button{
+    margin-top: 20px;
+}
+

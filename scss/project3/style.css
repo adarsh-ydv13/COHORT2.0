@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  font-family: "Poppins";
+}
+
+body {
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main section {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+}
+.main section .top {
+  width: 100%;
+}
+.main section .top img {
+  width: 100%;
+  border-radius: 10px;
+}
+.main section .bottom {
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(44, 43, 43);
+  padding: 1rem;
+}
+.main section .bottom .head h2 {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.main section .bottom .middle {
+  margin-top: 3rem;
+}
+.main section .bottom .middle h1 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.main section .bottom .middle p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+.main section .bottom .down {
+  margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+  .main {
+    flex-direction: row;
+  }
+  .main section {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .main section .top, .main section .bottom {
+    width: 50%;
+  }
+  .main section .bottom .middle h1 {
+    font-size: 2rem;
+    font-weight: 400;
+  }
+}/*# sourceMappingURL=style.css.map */
