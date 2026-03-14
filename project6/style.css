@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+html, body {
+    height: 100%; 
+    width: 100%;/* Ab main ka 100% kaam karega */
+    margin: 0; 
+     background: linear-gradient(to bottom, 
+        /* #1e25e3,   top blue */
+        #0a0a0a,   /* middle light sky blue */
+        #a3bdde    /* bottom pale white */
+    );   /* Default margins remove karne ke liye */
+     font-family: 'Poppins', sans-serif;
+}
+
+main{
+      height: 100%; 
+    width: 100%;
+    display: flex;
+    
+}
+
+.card{
+    height: 400px;
+    width: 200px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+gap: 20px;
+align-items: center;
+padding: 20px;
+background-color: rgba(255, 255, 255, 0.4);
+
+}
+
+.card img{
+    height: 100px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 20%;
+}
+h1{
+    font-size: large;
+}
+h2{
+    font-size: medium;
+}
+p{
+    font-size: small;
+}
